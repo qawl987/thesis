@@ -1,0 +1,115 @@
+2025-11-24T11:25:14.266379 [CU-UP   ] [I] Built in Release mode using commit 8e4f0bed05 on branch main
+2025-11-24T11:25:15.247019 [CU-UP   ] [W] Could not check scaling governor. filename=/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor error=No such file or directory
+2025-11-24T11:25:15.247034 [CU-UP   ] [W] DRM KMS polling is enabled, which may hinder performance. You can disable it using the "srsran_performance" script
+2025-11-24T11:25:15.249046 [CONFIG  ] [I] Worker pool "main_pool" instantiated with #workers=2, task_queue_size=2048, backoff_period=50us and priority=96.
+2025-11-24T11:25:15.327739 [GTPU    ] [I] GTP-U demux. queue_size=8192 batch_size=256 warn_on_drop=true test_mode=false
+2025-11-24T11:25:15.330376 [GTPU    ] [I] GTP-U demux. queue_size=2046 batch_size=256 warn_on_drop=false test_mode=false
+2025-11-24T11:25:15.330498 [GTPU    ] [I] Tunnel added. teid=0x000000
+2025-11-24T11:25:15.335339 [CU-UP   ] [I] CU-UP starting...
+2025-11-24T11:25:15.337567 [CU-UP-E1] [I] E1: TNL connection to CU-CP on srsran-cucp:38462 accepted
+2025-11-24T11:25:15.337637 [CU-UP-E1] [I] Sending E1SetupRequest
+2025-11-24T11:25:15.337643 [CU-UP-E1] [I] Tx PDU tid=0: GNB-CU-UP-E1SetupRequest
+2025-11-24T11:25:15.338246 [CU-UP-E1] [I] Rx PDU tid=0: GNB-CU-UP-E1SetupResponse
+2025-11-24T11:25:15.338248 [CU-UP-E1] [I] "E1AP CU-UP Setup Procedure" finalized
+2025-11-24T11:25:15.338281 [CU-UP   ] [I] CU-UP started successfully
+2025-11-24T11:25:44.084503 [CU-UP-E1] [I] Rx PDU cu_cp_ue=0: BearerContextSetupRequest
+2025-11-24T11:25:44.084566 [CU-UP   ] [I] ue=0: UE created
+2025-11-24T11:25:44.085026 [GTPU    ] [I] ue=0 DL teid=0x000001: GTPU NGU Rx configured. node=ngu local_teid=0x000001 t_reordering=0ms warn_on_drop=false ignore_ue_ambr=true
+2025-11-24T11:25:44.085034 [GTPU    ] [I] ue=0 UL teid=0x000006: GTPU NGU Tx configured. peer_teid=0x000006 peer_addr=10.100.50.233 peer_port=2152
+2025-11-24T11:25:44.085278 [GTPU    ] [I] Tunnel added. teid=0x000001
+2025-11-24T11:25:44.085321 [SDAP    ] [I] ue=0 psi=1: Mapping QFI=1 DRB1 default_drb=true hdr_ul=absent hdr_dl=absent
+2025-11-24T11:25:44.089767 [PDCP    ] [I] ue=0 DRB1 DL: PDCP configured. rb_type=DRB rlc_mode=AM sn_size=18 discard_timer=infinity count_notify=3221225472 count_max=4294967294 warn_on_drop=false test_mode=false
+2025-11-24T11:25:44.091679 [PDCP    ] [I] ue=0 DRB1 UL: PDCP configured. rb_type=DRB rlc_mode=AM sn_size=18 t_reordering=220 count_notify=3221225472 count_max=4294967294
+2025-11-24T11:25:44.091689 [PDCP    ] [I] ue=0 DRB1 DL: Security configured: NIA2 (off) NEA0 (on) domain=UP
+2025-11-24T11:25:44.091690 [PDCP    ] [I] ue=0 DRB1 DL: 128 K_int: 
+	55 04 86 d7 d9 20 f7 fe 39 51 99 11 13 ca b2 60
+2025-11-24T11:25:44.091690 [PDCP    ] [I] ue=0 DRB1 DL: 128 K_enc: 
+	7d 46 c2 d5 19 a3 09 e0 44 06 1c f3 b2 46 46 c2
+2025-11-24T11:25:44.091691 [PDCP    ] [I] ue=0 DRB1 UL: Security configured: NIA2 (off) NEA0 (on) domain=UP
+2025-11-24T11:25:44.091692 [PDCP    ] [I] ue=0 DRB1 UL: 128 K_int: 
+	55 04 86 d7 d9 20 f7 fe 39 51 99 11 13 ca b2 60
+2025-11-24T11:25:44.091692 [PDCP    ] [I] ue=0 DRB1 UL: 128 K_enc: 
+	7d 46 c2 d5 19 a3 09 e0 44 06 1c f3 b2 46 46 c2
+2025-11-24T11:25:44.091693 [CU-F1-U ] [I] Creating CU gateway local bearer with UL GTP Tunnel=0x000001
+2025-11-24T11:25:44.091735 [GTPU    ] [I] ue=0 RX teid=0x000001: GTPU NR-U Rx configured. node=cu_up local_teid=0x000001
+2025-11-24T11:25:44.092370 [GTPU    ] [I] Tunnel added. teid=0x000001
+2025-11-24T11:25:44.093378 [CU-F1-U ] [I] ue=0 DRB1 ul-teid=0x000001: F1-U bearer configured. warn_on_drop=true dl_t_notif_timer=10ms queue_size=8192 batch_size=256
+2025-11-24T11:25:44.093430 [SDAP    ] [I] ue=0 psi=1: Mapping QFI=2 DRB2 default_drb=true hdr_ul=absent hdr_dl=absent
+2025-11-24T11:25:44.097412 [PDCP    ] [I] ue=0 DRB2 DL: PDCP configured. rb_type=DRB rlc_mode=AM sn_size=18 discard_timer=300 count_notify=3221225472 count_max=4294967294 warn_on_drop=false test_mode=false
+2025-11-24T11:25:44.100619 [PDCP    ] [I] ue=0 DRB2 UL: PDCP configured. rb_type=DRB rlc_mode=AM sn_size=18 t_reordering=100 count_notify=3221225472 count_max=4294967294
+2025-11-24T11:25:44.100625 [PDCP    ] [I] ue=0 DRB2 DL: Security configured: NIA2 (off) NEA0 (on) domain=UP
+2025-11-24T11:25:44.100625 [PDCP    ] [I] ue=0 DRB2 DL: 128 K_int: 
+	55 04 86 d7 d9 20 f7 fe 39 51 99 11 13 ca b2 60
+2025-11-24T11:25:44.100625 [PDCP    ] [I] ue=0 DRB2 DL: 128 K_enc: 
+	7d 46 c2 d5 19 a3 09 e0 44 06 1c f3 b2 46 46 c2
+2025-11-24T11:25:44.100627 [PDCP    ] [I] ue=0 DRB2 UL: Security configured: NIA2 (off) NEA0 (on) domain=UP
+2025-11-24T11:25:44.100627 [PDCP    ] [I] ue=0 DRB2 UL: 128 K_int: 
+	55 04 86 d7 d9 20 f7 fe 39 51 99 11 13 ca b2 60
+2025-11-24T11:25:44.100628 [PDCP    ] [I] ue=0 DRB2 UL: 128 K_enc: 
+	7d 46 c2 d5 19 a3 09 e0 44 06 1c f3 b2 46 46 c2
+2025-11-24T11:25:44.100629 [CU-F1-U ] [I] Creating CU gateway local bearer with UL GTP Tunnel=0x000002
+2025-11-24T11:25:44.100686 [GTPU    ] [I] ue=0 RX teid=0x000002: GTPU NR-U Rx configured. node=cu_up local_teid=0x000002
+2025-11-24T11:25:44.101235 [GTPU    ] [I] Tunnel added. teid=0x000002
+2025-11-24T11:25:44.101697 [CU-F1-U ] [I] ue=0 DRB2 ul-teid=0x000002: F1-U bearer configured. warn_on_drop=true dl_t_notif_timer=10ms queue_size=8192 batch_size=256
+2025-11-24T11:25:44.101748 [CU-UP-E1] [I] Tx PDU ue=0 cu_cp_ue=0 cu_up_ue=0: BearerContextSetupResponse
+2025-11-24T11:25:44.119585 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:25:44.127161 [GTPU    ] [I] ue=0 RX teid=0x000002: RX DL data delivery status
+2025-11-24T11:25:44.127488 [CU-UP-E1] [I] Rx PDU ue=0 cu_cp_ue=0 cu_up_ue=0: BearerContextModificationRequest
+2025-11-24T11:25:44.127576 [CU-UP   ] [I] ue=0: Attaching dl_teid={Addr=10.100.50.236 TEID=0x000001} to F1-U tunnel with ul_teid=0x000001
+2025-11-24T11:25:44.127593 [GTPU    ] [I] ue=0 TX teid=0x000001: GTPU NR-U Tx configured. peer_teid=0x000001 peer_addr=10.100.50.236 peer_port=2152
+2025-11-24T11:25:44.127594 [CU-F1-U ] [I] Connected CU bearer to DU bearer. UL GTP Tunnel={Addr=10.100.50.235 TEID=0x000001}, DL GTP Tunnel={Addr=10.100.50.236 TEID=0x000001}
+2025-11-24T11:25:44.127594 [CU-UP   ] [I] ue=0: Modified DRB1. psi=1 f1u_teid=0x000001
+2025-11-24T11:25:44.127603 [CU-UP   ] [I] ue=0: Attaching dl_teid={Addr=10.100.50.236 TEID=0x000002} to F1-U tunnel with ul_teid=0x000002
+2025-11-24T11:25:44.127612 [GTPU    ] [I] ue=0 TX teid=0x000002: GTPU NR-U Tx configured. peer_teid=0x000002 peer_addr=10.100.50.236 peer_port=2152
+2025-11-24T11:25:44.127612 [CU-F1-U ] [I] Connected CU bearer to DU bearer. UL GTP Tunnel={Addr=10.100.50.235 TEID=0x000002}, DL GTP Tunnel={Addr=10.100.50.236 TEID=0x000002}
+2025-11-24T11:25:44.127612 [CU-UP   ] [I] ue=0: Modified DRB2. psi=1 f1u_teid=0x000002
+2025-11-24T11:25:44.127645 [CU-UP-E1] [I] Tx PDU ue=0 cu_cp_ue=0 cu_up_ue=0: BearerContextModificationResponse
+2025-11-24T11:25:58.472232 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status. t_pdu_len=87
+2025-11-24T11:25:58.472237 [PDCP    ] [I] ue=0 DRB1 UL: RX PDU. type=data pdu_len=87 sn=0 count=0
+2025-11-24T11:25:58.472245 [PDCP    ] [I] ue=0 DRB1 UL: RX SDU. count=0
+2025-11-24T11:25:58.472247 [GTPU    ] [I] ue=0 UL teid=0x000006: TX PDU. pdu_len=100 teid=0x000006 qfi=QFI=1
+2025-11-24T11:25:58.475964 [GTPU    ] [I] ue=0 DL teid=0x000001: RX SDU. sdu_len=84 qos_flow=QFI=1 sn={na}
+2025-11-24T11:25:58.475972 [PDCP    ] [I] ue=0 DRB1 DL: TX PDU. type=data pdu_len=87 sn=0 count=0 is_retx=false
+2025-11-24T11:25:58.475976 [GTPU    ] [I] ue=0 TX teid=0x000001: TX PDU. pdu_len=107 teid=0x000001
+2025-11-24T11:25:58.487298 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:25:58.559694 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:25:59.441555 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status. t_pdu_len=87
+2025-11-24T11:25:59.441561 [PDCP    ] [I] ue=0 DRB1 UL: RX PDU. type=data pdu_len=87 sn=1 count=1
+2025-11-24T11:25:59.441569 [PDCP    ] [I] ue=0 DRB1 UL: RX SDU. count=1
+2025-11-24T11:25:59.441571 [GTPU    ] [I] ue=0 UL teid=0x000006: TX PDU. pdu_len=100 teid=0x000006 qfi=QFI=1
+2025-11-24T11:25:59.445423 [GTPU    ] [I] ue=0 DL teid=0x000001: RX SDU. sdu_len=84 qos_flow=QFI=1 sn={na}
+2025-11-24T11:25:59.445433 [PDCP    ] [I] ue=0 DRB1 DL: TX PDU. type=data pdu_len=87 sn=1 count=1 is_retx=false
+2025-11-24T11:25:59.445437 [GTPU    ] [I] ue=0 TX teid=0x000001: TX PDU. pdu_len=107 teid=0x000001
+2025-11-24T11:25:59.454604 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:25:59.519003 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:26:00.452089 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status. t_pdu_len=87
+2025-11-24T11:26:00.452095 [PDCP    ] [I] ue=0 DRB1 UL: RX PDU. type=data pdu_len=87 sn=2 count=2
+2025-11-24T11:26:00.452104 [PDCP    ] [I] ue=0 DRB1 UL: RX SDU. count=2
+2025-11-24T11:26:00.452107 [GTPU    ] [I] ue=0 UL teid=0x000006: TX PDU. pdu_len=100 teid=0x000006 qfi=QFI=1
+2025-11-24T11:26:00.456482 [GTPU    ] [I] ue=0 DL teid=0x000001: RX SDU. sdu_len=84 qos_flow=QFI=1 sn={na}
+2025-11-24T11:26:00.456491 [PDCP    ] [I] ue=0 DRB1 DL: TX PDU. type=data pdu_len=87 sn=2 count=2 is_retx=false
+2025-11-24T11:26:00.456495 [GTPU    ] [I] ue=0 TX teid=0x000001: TX PDU. pdu_len=107 teid=0x000001
+2025-11-24T11:26:00.467945 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:26:00.574498 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:26:01.455524 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status. t_pdu_len=87
+2025-11-24T11:26:01.455530 [PDCP    ] [I] ue=0 DRB1 UL: RX PDU. type=data pdu_len=87 sn=3 count=3
+2025-11-24T11:26:01.455540 [PDCP    ] [I] ue=0 DRB1 UL: RX SDU. count=3
+2025-11-24T11:26:01.455542 [GTPU    ] [I] ue=0 UL teid=0x000006: TX PDU. pdu_len=100 teid=0x000006 qfi=QFI=1
+2025-11-24T11:26:01.459425 [GTPU    ] [I] ue=0 DL teid=0x000001: RX SDU. sdu_len=84 qos_flow=QFI=1 sn={na}
+2025-11-24T11:26:01.459435 [PDCP    ] [I] ue=0 DRB1 DL: TX PDU. type=data pdu_len=87 sn=3 count=3 is_retx=false
+2025-11-24T11:26:01.459439 [GTPU    ] [I] ue=0 TX teid=0x000001: TX PDU. pdu_len=107 teid=0x000001
+2025-11-24T11:26:01.469981 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:26:01.523629 [GTPU    ] [I] ue=0 RX teid=0x000001: RX DL data delivery status
+2025-11-24T11:26:12.148659 [CU-UP-E1] [I] Rx PDU tid=0: Reset
+2025-11-24T11:26:12.148711 [GTPU    ] [I] Tunnel removed. teid=0x000001
+2025-11-24T11:26:12.149541 [GTPU    ] [I] Tunnel removed. teid=0x000001
+2025-11-24T11:26:12.150182 [GTPU    ] [I] Tunnel removed. teid=0x000002
+2025-11-24T11:26:12.150184 [CU-UP   ] [I] ue=0: Disconnecting PDU session with psi=1
+2025-11-24T11:26:12.154475 [CU-UP-E1] [I] Tx PDU tid=0: ResetAcknowledge
+2025-11-24T11:26:13.908347 [CU-UP-E1] [I] Tx PDU tid=1: E1ReleaseRequest
+2025-11-24T11:26:13.908634 [CU-UP-E1] [I] Rx PDU tid=1: E1ReleaseResponse
+2025-11-24T11:26:13.908798 [CU-UP-E1] [I] E1AP CU-UP Release Procedure: E1 TNL association shut down
+2025-11-24T11:26:13.908982 [CU-UP   ] [I] CU-UP stopped successfully
+2025-11-24T11:26:13.909391 [CU-UP   ] [I] Closing PCAP files...
+2025-11-24T11:26:13.911471 [CU-UP   ] [I] PCAP files successfully closed.
+(END)

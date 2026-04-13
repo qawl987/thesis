@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: qawl987/gnu-breaker
+  pullPolicy: IfNotPresent
+  tag: latest
+
+nameOverride: "gnu-breaker"
+fullnameOverride: "gnu-breaker"
+
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    add: ["NET_ADMIN", "NET_RAW"]
+  privileged: false
+
+resources:
+  limits:
+    cpu: "1"
+    memory: 1Gi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# Keep on the same worker node as DU/UE workloads when using local macvlan L2
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+multus:
+  nadName: "gnu-breaker-macvlan"
+  interface: "zmq"
+  master: "eth1.3"
+  ipAddress: "172.6.0.1"  # Must match the IP used in zeromq_rep_sink bind addresses
+  subnetMask: 24

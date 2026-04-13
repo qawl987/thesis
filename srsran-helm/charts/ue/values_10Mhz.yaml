@@ -1,0 +1,113 @@
+replicaCount: 1
+
+image:
+  repository: srsran-ue
+  pullPolicy: IfNotPresent
+  tag: latest
+
+nameOverride: "ue"
+fullnameOverride: "srsran-ue"
+
+serviceAccount:
+  create: true
+  name: "srsran-ue"
+
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    add: ["NET_ADMIN", "NET_RAW"]
+  privileged: true
+
+resources:
+  limits:
+    cpu: 2
+    memory: 4Gi
+  requests:
+    cpu: 1500m
+    memory: 2Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+logHostPath: "/home/free5gc/srsran-helm/srsran-logs/ue"
+
+# DU service configuration
+duService:
+  name: "srsran-du"
+  zmqTxPort: 2000
+  zmqRxPort: 2001
+
+# Multus network configuration for ZMQ
+multus:
+  zmqInterface:
+    create: true  # Create dedicated ZMQ NAD
+    nadName: "zmqnetwork"
+    ipAddress: "10.100.50.218"  # Fixed IP for UE ZMQ
+    gateway: "10.100.50.222"
+
+config:
+  ue_conf: |-
+    #####################################################################
+    #                   srsUE configuration file
+    #####################################################################
+
+    [rf]
+    # Using ZMQ device to connect to the gNB.
+    freq_offset = 0
+    tx_gain = 70
+    rx_gain = 40
+    srate = 11.52e6
+    nof_antennas = 1
+
+    device_name = zmq
+    device_args = tx_port=tcp://10.100.50.218:2001,rx_port=tcp://10.100.50.217:2000,base_srate=11.52e6
+
+    [rat.eutra]
+    dl_earfcn = 2850
+    nof_carriers = 0
+
+    [rat.nr]
+    bands = 3
+    nof_carriers = 1
+    max_nof_prb = 52
+    nof_prb = 52
+
+    [rrc]
+    release = 15
+    ue_category = 4
+
+    [usim]
+    mode = soft
+    algo = milenage
+    imsi = 208930000000001
+    k    = 8baf473f2f8fd09487cccbd7097c6862
+    opc  = 8e27b6af0e692e750f32667a3b14605d
+    imei = 356938035643803
+
+    [nas]
+    apn = internet
+    apn_protocol = ipv4
+
+    [slicing]
+    enable = true
+    nssai-sst = 1
+    nssai-sd = 66051
+
+    [gw]
+    ip_devname = uesimtun0
+    ip_netmask = 255.255.255.0
+
+    [gui]
+    enable = false
+
+    [log]
+    all_level = info
+    filename = /tmp/logs/ue.log
+    phy_lib_level = none
+    all_hex_limit = 32
+
+    [pcap]
+    enable = nas
+    nas_filename = /tmp/logs/ue_nas.pcap

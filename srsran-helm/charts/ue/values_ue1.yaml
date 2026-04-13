@@ -1,0 +1,116 @@
+replicaCount: 1
+
+image:
+  repository: docker.io/qawl987/srsran-ue
+  pullPolicy: IfNotPresent
+  tag: latest
+
+nameOverride: "ue1"
+fullnameOverride: "srsran-ue1"
+
+serviceAccount:
+  create: true
+  name: "srsran-ue1"
+
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    add: ["NET_ADMIN", "NET_RAW"]
+  privileged: true
+
+resources:
+  limits:
+    cpu: 1
+    memory: 4Gi
+  requests:
+    cpu: 1
+    memory: 2Gi
+
+# Must run on the same worker node as the Nephio DU to share the eth1.2 macvlan L2 bridge
+nodeSelector:
+  kubernetes.io/hostname: regional-md-0-7hcxb-z4qv6-q6r67
+tolerations: []
+affinity: {}
+
+logHostPath: "/home/free5gc/srsran-helm/srsran-logs/ue"
+
+# DU ZMQ address (Nephio DU f1u interface: 172.6.0.0/24 on eth1.2 macvlan)
+duService:
+  name: "srsran-du"
+  zmqIP: "172.6.0.0"
+  zmqTxPort: 2000  # DU sends on 2000 -> UE rx
+  zmqRxPort: 2001  # DU receives on 2001 -> UE tx
+
+# Multus network configuration for ZMQ
+# Must be macvlan on eth1.x (same L2 as Nephio DU f1u) with IP in 172.6.0.0/24
+multus:
+  nadName: "zmqnetwork"
+  masterIf: "eth1.3"
+  ipAddress: "172.6.0.3"  # UE1 ZMQ IP on 172.6.0.0/24 subnet
+  subnetMask: 24
+
+config:
+  ue_conf: |-
+    #####################################################################
+    #                   srsUE configuration file
+    #####################################################################
+
+    [rf]
+    # Using ZMQ device to connect to the gNB.
+    freq_offset = 0
+    tx_gain = 50
+    rx_gain = 40
+    srate = 11.52e6
+    nof_antennas = 1
+
+    device_name = zmq
+    device_args = tx_port=tcp://172.6.0.3:2001,rx_port=tcp://172.6.0.1:2100,base_srate=11.52e6
+
+    [rat.eutra]
+    dl_earfcn = 2850
+    nof_carriers = 0
+
+    [rat.nr]
+    bands = 3
+    nof_carriers = 1
+    max_nof_prb = 52
+    nof_prb = 52
+
+    [rrc]
+    release = 15
+    ue_category = 4
+
+    [usim]
+    mode = soft
+    algo = milenage
+    imsi = 208930000000001
+    k    = 8baf473f2f8fd09487cccbd7097c6862
+    opc  = 8e27b6af0e692e750f32667a3b14605d
+    imei = 356938035643803
+
+    [nas]
+    apn = internet
+    apn_protocol = ipv4
+
+    [slicing]
+    enable = true
+    nssai-sst = 1
+    nssai-sd = 66051
+
+    [gw]
+    ip_devname = uesimtun0
+    ip_netmask = 255.255.255.0
+
+    [gui]
+    enable = false
+
+    [log]
+    all_level = warning
+    filename = /tmp/logs/ue.log
+    phy_lib_level = none
+    all_hex_limit = 32
+
+    [pcap]
+    enable = nas
+    nas_filename = /tmp/logs/ue_nas.pcap

@@ -1,0 +1,106 @@
+replicaCount: 1
+
+image:
+  repository: srsran-split
+  pullPolicy: IfNotPresent
+  tag: latest
+
+nameOverride: "du"
+fullnameOverride: "srsran-du"
+
+serviceAccount:
+  create: true
+  name: "srsran-du"
+
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    add: ["SYS_NICE", "NET_ADMIN", "IPC_LOCK", "SYS_RESOURCE"]
+  privileged: true
+
+resources:
+  limits:
+    cpu: 8
+    memory: 8Gi
+  requests:
+    cpu: 2000m
+    memory: 4Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+logHostPath: "/home/free5gc/srsran-helm/srsran-logs/du"
+
+service:
+  type: ClusterIP
+  # ZMQ ports
+  zmqTxPort: 2000
+  zmqRxPort: 2001
+
+# Multus network configuration
+multus:
+  n3interface:
+    create: false  # Use existing N3 NAD from free5gc-upf
+    nadName: "n3network-free5gc-v1-free5gc-upf"
+    f1u:
+      ipAddress: "10.100.50.236"
+      gateway: "10.100.50.238"
+  zmqInterface:
+    create: true  # Create dedicated ZMQ NAD
+    nadName: "zmqnetwork"
+    ipAddress: "10.100.50.217"  # Fixed IP for DU ZMQ
+    gateway: "10.100.50.222"
+
+config:
+  du.yml: |-
+    f1ap:
+      cu_cp_addr: srsran-cucp              # CU-CP service name (same namespace)
+      bind_addr: 0.0.0.0
+
+    f1u:
+      socket:
+        -
+          bind_addr: 10.100.50.236         # F1-U interface IP for CU-UP communication
+
+    ru_sdr:
+      device_driver: zmq                     # ZMQ radio driver for testing
+      device_args: tx_port=tcp://10.100.50.217:2000,rx_port=tcp://10.100.50.218:2001,base_srate=23.04e6
+      srate: 23.04
+      tx_gain: 75
+      rx_gain: 75
+
+    cell_cfg:
+      dl_arfcn: 368500                       # ARFCN of the downlink carrier
+      band: 3                                # NR band
+      channel_bandwidth_MHz: 20              # Channel bandwidth
+      common_scs: 15                         # Subcarrier spacing in kHz
+      plmn: "20893"                          # PLMN (must match AMF config)
+      tac: 1                                 # Tracking area code
+      pci: 1
+      pdcch:
+        common:
+          ss0_index: 0
+          coreset0_index: 12
+        dedicated:
+          ss2_type: common
+          dci_format_0_1_and_1_1: false
+      prach:
+        prach_config_index: 1
+      pdsch:
+        mcs_table: qam64
+      pusch:
+        mcs_table: qam64
+
+    log:
+      filename: /tmp/logs/du.log
+      all_level: warning
+
+    pcap:
+      mac_enable: true
+      mac_filename: /tmp/logs/du_mac.pcap
+      f1ap_enable: true
+      f1ap_filename: /tmp/logs/du_f1ap.pcap
+      f1u_enable: true
+      f1u_filename: /tmp/logs/du_f1u.pcap

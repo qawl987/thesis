@@ -1,0 +1,74 @@
+replicaCount: 1
+
+image:
+  repository: srsran-split
+  pullPolicy: IfNotPresent
+  tag: latest
+
+nameOverride: "cucp"
+fullnameOverride: "srsran-cucp"
+
+serviceAccount:
+  create: true
+  name: "srsran-cucp"
+
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    add: ["SYS_NICE", "NET_ADMIN", "IPC_LOCK", "SYS_RESOURCE"]
+  privileged: true
+
+resources:
+  limits:
+    cpu: 2
+    memory: 4Gi
+  requests:
+    cpu: 2000m
+    memory: 2Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+logHostPath: "/home/free5gc/srsran-helm/srsran-logs/cucp"
+
+service:
+  type: ClusterIP
+  # E1AP port (CU-CP <-> CU-UP)
+  e1apPort: 38462
+  # F1AP port (CU-CP <-> DU)
+  f1apPort: 38472
+
+config:
+  cu_cp.yml: |-
+    cu_cp:
+      request_pdu_session_timeout: 40
+      inactivity_timer: 7000
+      amf:
+        addr: free5gc-v1-free5gc-amf-amf-n2  # AMF N2 service (now listening on 0.0.0.0)
+        port: 38412
+        bind_addr: 0.0.0.0                   # Will bind to pod IP
+        supported_tracking_areas:
+          - tac: 1
+            plmn_list:
+              - plmn: "20893"
+                tai_slice_support_list:
+                  - sst: 1
+                    sd: "010203"
+      e1ap:
+        bind_addr: 0.0.0.0                 # E1AP interface for CU-UP connection
+      f1ap:
+        bind_addr: 0.0.0.0                 # F1AP interface for DU connection
+
+    log:
+      filename: /tmp/logs/cu_cp.log
+      all_level: warning
+
+    pcap:
+      ngap_enable: true
+      ngap_filename: /tmp/logs/cu_cp_ngap.pcap
+      f1ap_enable: true
+      f1ap_filename: /tmp/logs/cu_cp_f1ap.pcap
+      e1ap_enable: true
+      e1ap_filename: /tmp/logs/cu_cp_e1ap.pcap

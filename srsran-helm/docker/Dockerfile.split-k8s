@@ -1,0 +1,45 @@
+#
+# Simplified Dockerfile for Split-2 Architecture in Kubernetes
+# This builds minimal images for CU-CP, CU-UP, and DU with ZMQ support
+#
+
+FROM ubuntu:24.04
+
+# Install runtime dependencies
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    libzmq5 \
+    libboost-program-options1.83.0 \
+    libfftw3-single3 \
+    libyaml-cpp0.8 \
+    libsctp1 \
+    libmbedtls14 \
+    libgtest-dev \
+    ca-certificates \
+    iproute2 \
+    iputils-ping \
+    net-tools \
+    tcpdump \
+    && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy binaries from local build
+COPY build/apps/cu_cp/srscucp /usr/local/bin/srscucp
+COPY build/apps/cu_up/srscuup /usr/local/bin/srscuup
+COPY build/apps/du/srsdu /usr/local/bin/srsdu
+
+# Make binaries executable
+RUN chmod +x /usr/local/bin/srscucp /usr/local/bin/srscuup /usr/local/bin/srsdu
+
+# Create directories for configs and logs
+RUN mkdir -p /etc/srsran /tmp/logs
+
+# Copy entrypoint scripts
+COPY docker/resources/entrypoint-cucp.sh /usr/local/bin/entrypoint-cucp.sh
+COPY docker/resources/entrypoint-cuup.sh /usr/local/bin/entrypoint-cuup.sh
+COPY docker/resources/entrypoint-du.sh /usr/local/bin/entrypoint-du.sh
+RUN chmod +x /usr/local/bin/entrypoint-*.sh
+
+WORKDIR /etc/srsran
+
+# Default command (will be overridden by Kubernetes)
+CMD ["/bin/bash"]

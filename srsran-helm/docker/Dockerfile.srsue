@@ -1,0 +1,42 @@
+#
+# Dockerfile for srsUE (srsRAN_4G) in Kubernetes
+# This builds a minimal image for UE with ZMQ support
+#
+
+FROM ubuntu:24.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install runtime dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libzmq5 \
+    libboost-program-options1.83.0 \
+    libfftw3-single3 \
+    libmbedcrypto7t64 \
+    libconfig++9v5 \
+    libsctp1 \
+    ca-certificates \
+    iproute2 \
+    iputils-ping \
+    net-tools \
+    tcpdump \
+    iperf3 \
+    && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy UE binary from local build
+COPY build/srsue /usr/local/bin/srsue
+
+# Copy entrypoint script
+COPY docker/resources/entrypoint_srsue.sh /usr/local/bin/entrypoint.sh
+
+# Make executable
+RUN chmod +x /usr/local/bin/srsue /usr/local/bin/entrypoint.sh
+
+# Create directories for configs and logs
+RUN mkdir -p /etc/srsran /tmp/logs
+
+WORKDIR /etc/srsran
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["/usr/local/bin/srsue", "/etc/srsran/ue.conf"]

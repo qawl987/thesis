@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.fullnameOverride }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.nameOverride }}
+data:
+  ue.conf: |-
+{{ .Values.config.ue_conf | indent 4 }}

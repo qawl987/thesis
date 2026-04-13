@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.fullnameOverride }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.nameOverride }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Values.nameOverride }}
+  ports:
+    - name: e1ap
+      port: {{ .Values.service.e1apPort }}
+      targetPort: {{ .Values.service.e1apPort }}
+      protocol: SCTP
+    - name: f1ap
+      port: {{ .Values.service.f1apPort }}
+      targetPort: {{ .Values.service.f1apPort }}
+      protocol: SCTP

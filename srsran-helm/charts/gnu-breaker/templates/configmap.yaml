@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.fullnameOverride }}-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.nameOverride }}
+data:
+  multi_ue_scenario.py: |-
+{{ required "files/multi_ue_scenario.py is required. Generate it before helm install." (.Files.Get "files/multi_ue_scenario.py") | nindent 4 }}

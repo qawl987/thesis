@@ -1,0 +1,16 @@
+FROM ubuntu:24.04
+
+# 避免 apt-get 安裝時跳出互動式視窗卡住
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 安裝 gnuradio 以及 zmq 依賴，並清理 apt 暫存以縮小 Image 體積
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gnuradio \
+    python3-zmq \
+    && rm -rf /var/lib/apt/lists/*
+
+# 設定工作目錄，之後 Helm ConfigMap 會掛載到這裡
+WORKDIR /config
+
+# K8s 啟動時預設不會馬上退出
+CMD ["sleep", "infinity"]

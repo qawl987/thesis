@@ -1,0 +1,78 @@
+replicaCount: 1
+
+image:
+  repository: srsran-split
+  pullPolicy: IfNotPresent
+  tag: latest
+
+nameOverride: "cuup"
+fullnameOverride: "srsran-cuup"
+
+serviceAccount:
+  create: true
+  name: "srsran-cuup"
+
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    add: ["SYS_NICE", "NET_ADMIN", "IPC_LOCK", "SYS_RESOURCE"]
+  privileged: true
+
+resources:
+  limits:
+    cpu: 2
+    memory: 4Gi
+  requests:
+    cpu: 2000m
+    memory: 2Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+logHostPath: "/home/free5gc/srsran-helm/srsran-logs/cuup"
+
+service:
+  type: ClusterIP
+  # F1-U port (CU-UP <-> DU user plane)
+  f1uPort: 2152
+
+# Multus network configuration
+multus:
+  n3interface:
+    create: false  # Use existing N3 NAD from free5gc-upf
+    nadName: "n3network-free5gc-v1-free5gc-upf"
+    ngu:
+      ipAddress: "10.100.50.234"
+      gateway: "10.100.50.238"
+    f1u:
+      ipAddress: "10.100.50.235"
+      gateway: "10.100.50.238"
+
+config:
+  cu_up.yml: |-
+    cu_up:
+      e1ap:
+        cu_cp_addr: srsran-cucp              # CU-CP service name (same namespace)
+        bind_addr: 0.0.0.0
+      ngu:
+        socket:
+          -
+            bind_addr: 10.100.50.234         # N3 interface IP for UPF communication
+      f1u:
+        socket:
+          -
+            bind_addr: 10.100.50.235         # F1-U interface IP for DU communication
+
+    log:
+      filename: /tmp/logs/cu_up.log
+      all_level: warning
+
+    pcap:
+      e1ap_enable: true
+      e1ap_filename: /tmp/logs/cu_up_e1ap.pcap
+      f1u_enable: true
+      f1u_filename: /tmp/logs/cu_up_f1u.pcap
+      n3_enable: true
+      n3_filename: /tmp/logs/cu_up_n3.pcap
