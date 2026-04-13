@@ -1,0 +1,46 @@
+go fmt ./...
+go vet ./...
+Detecting free5GC WebConsole URL from regional cluster...
+Using WebConsole URL: http://172.18.0.5:30500
+go run ./cmd/main.go \
+	--free5gc-url http://172.18.0.5:30500 \
+	--free5gc-username admin \
+	--free5gc-password free5gc
+2026-04-03T03:57:34Z	INFO	setup	free5GC WebConsole client configured	{"url": "http://172.18.0.5:30500"}
+2026-04-03T03:57:34Z	INFO	setup	starting e2e-orchestrator manager
+2026-04-03T03:57:34Z	INFO	controller-runtime.metrics	Starting metrics server
+2026-04-03T03:57:34Z	INFO	controller-runtime.metrics	Serving metrics server	{"bindAddress": ":9443", "secure": false}
+2026-04-03T03:57:34Z	INFO	starting server	{"name": "health probe", "addr": "[::]:8081"}
+2026-04-03T03:57:34Z	INFO	Starting EventSource	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "source": "kind source: *v1alpha1.E2EQoSIntent"}
+2026-04-03T03:57:34Z	INFO	Starting Controller	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent"}
+2026-04-03T03:57:34Z	INFO	Starting workers	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "worker count": 1}
+2026-04-03T03:57:34Z	INFO	Reconcile called	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "a73560ea-2d48-4d1f-ac26-10bcb7c4c400", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}}
+2026-04-03T03:57:34Z	INFO	Intent already applied and spec unchanged, skipping reconciliation	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "a73560ea-2d48-4d1f-ac26-10bcb7c4c400", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}}
+2026-04-03T03:57:54Z	INFO	Reconcile called	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}}
+2026-04-03T03:57:54Z	INFO	Spec changed, re-processing intent	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "previousGeneration": 14, "currentGeneration": 15}
+2026-04-03T03:57:54Z	INFO	Translating intent group	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "intentGroup": "embb"}
+2026-04-03T03:57:54Z	INFO	Translated intent parameters	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "intentGroup": "embb", "coreParams": "5QI=6, QFI=6", "ranParams": "SST=1, SD=66051, minPRB=0, maxPRB=100, priority=10"}
+2026-04-03T03:57:54Z	INFO	Translating intent group	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "intentGroup": "urllc"}
+2026-04-03T03:57:54Z	INFO	Translated intent parameters	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "intentGroup": "urllc", "coreParams": "5QI=85, QFI=85", "ranParams": "SST=1, SD=1122867, minPRB=0, maxPRB=50, priority=200"}
+2026-04-03T03:57:54Z	INFO	Registering UEs to Core domain via free5GC WebConsole	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}}
+2026-04-03T03:57:54Z	INFO	Registering UE to free5GC	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "imsi": "208930000000001", "5QI": 6, "SST": 1, "SD": 66051}
+[free5GC] Login successful
+[free5GC] UE 208930000000001 already exists, attempting update
+[free5GC] Successfully updated UE 208930000000001 with 5QI=6, SST=1, SD=66051
+2026-04-03T03:57:57Z	INFO	Registering UE to free5GC	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "imsi": "208930000000002", "5QI": 85, "SST": 1, "SD": 1122867}
+[free5GC] UE 208930000000002 already exists, attempting update
+[free5GC] Successfully updated UE 208930000000002 with 5QI=85, SST=1, SD=1122867
+2026-04-03T03:57:57Z	INFO	Applying all slice configs to RAN via Porch	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "8dd1bb84-464d-4341-ae3b-05146b837980", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "sliceCount": 2}
+[Porch] Created draft package with workspace: intent-20260403-035757
+[Porch] Pulled package to: /tmp/porch-workdir/intent-20260403-035757
+[Porch] Mutated srscellconfig.yaml with 2 slice configs
+[Porch] Pushed changes to draft package: regional.srsran-gnb.intent-20260403-035757
+[Porch] Proposed package: regional.srsran-gnb.intent-20260403-035757
+[Porch] Approved package: regional.srsran-gnb.intent-20260403-035757
+[Porch] Successfully updated RAN with 2 slice configs
+  - SST=1, SD=66051, maxPRB=100, priority=10
+  - SST=1, SD=1122867, maxPRB=50, priority=200
+2026-04-03T03:58:01Z	INFO	Reconcile called	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "b403c162-f8bf-499c-b61b-101e0ebaf912", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}}
+2026-04-03T03:58:01Z	INFO	Intent already applied and spec unchanged, skipping reconciliation	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "b403c162-f8bf-499c-b61b-101e0ebaf912", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}}
+2026-04-03T03:58:01Z	INFO	Reconcile called	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "3342993e-eab6-4367-996a-eee48529dbcf", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}}
+2026-04-03T03:58:01Z	INFO	Intent already applied and spec unchanged, skipping reconciliation	{"controller": "e2eqosintent", "controllerGroup": "e2e.intent.domain", "controllerKind": "E2EQoSIntent", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}, "namespace": "default", "name": "slices-intent", "reconcileID": "3342993e-eab6-4367-996a-eee48529dbcf", "E2EQoSIntent": {"name":"slices-intent","namespace":"default"}}

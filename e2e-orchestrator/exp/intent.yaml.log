@@ -1,0 +1,97 @@
+free5gc@nephio:~/e2e-orchestrator$ kubectl get e2eqosintent slices-intent -o yaml --watch
+apiVersion: e2e.intent.domain/v1alpha1
+kind: E2EQoSIntent
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"e2e.intent.domain/v1alpha1","kind":"E2EQoSIntent","metadata":{"annotations":{},"name":"slices-intent","namespace":"default"},"spec":{"intentGroups":[{"contexts":{"targetUEs":["208930000000001"]},"expectations":{"bandwidth":"high","resourceShare":"Partial","sliceType":"eMBB"},"id":"embb"},{"contexts":{"targetUEs":["208930000000002"]},"expectations":{"latency":"ultra-low","resourceShare":"Full","sliceType":"URLLC"},"id":"urllc"}]}}
+  creationTimestamp: "2026-03-31T14:13:05Z"
+  generation: 1
+  name: slices-intent
+  namespace: default
+  resourceVersion: "7231032"
+  uid: 7bb215c6-6465-411f-80c6-8c7b992527bc
+spec:
+  intentGroups:
+  - contexts:
+      targetUEs:
+      - "208930000000001"
+    expectations:
+      bandwidth: high
+      resourceShare: Partial
+      sliceType: eMBB
+    id: embb
+  - contexts:
+      targetUEs:
+      - "208930000000002"
+    expectations:
+      latency: ultra-low
+      resourceShare: Full
+      sliceType: URLLC
+    id: urllc
+status:
+  conditions:
+  - lastTransitionTime: "2026-03-31T14:16:11Z"
+    message: All intent groups have been successfully translated and applied
+    reason: AllIntentsApplied
+    status: "True"
+    type: Ready
+  fulfillmentState: FULFILLED
+  intentGroupStatuses:
+  - achievedTargets:
+      bandwidth: achieved
+      latency: not_applicable
+      resourceShare: achieved
+    domainStatus:
+      coreDomain:
+        lastUpdated: "2026-03-31T14:15:51Z"
+        message: UEs already registered manually
+        state: SKIPPED
+      ranDomain:
+        lastUpdated: "2026-03-31T14:16:11Z"
+        message: 'Slice configured: SST=1, SD=66051, maxPRB=50'
+        state: CONFIGURED
+    fulfillmentState: FULFILLED
+    id: embb
+    message: Intent successfully translated and applied to RAN domain
+    phase: Applied
+    translatedParams:
+      coreParams:
+        fiveQI: 6
+        qfi: 6
+      ranParams:
+        maxPrbPolicyRatio: 50
+        minPrbPolicyRatio: 0
+        priority: 10
+        sd: 66051
+        sst: 1
+  - achievedTargets:
+      bandwidth: not_applicable
+      latency: achieved
+      resourceShare: achieved
+    domainStatus:
+      coreDomain:
+        lastUpdated: "2026-03-31T14:15:51Z"
+        message: UEs already registered manually
+        state: SKIPPED
+      ranDomain:
+        lastUpdated: "2026-03-31T14:16:11Z"
+        message: 'Slice configured: SST=1, SD=1122867, maxPRB=100'
+        state: CONFIGURED
+    fulfillmentState: FULFILLED
+    id: urllc
+    message: Intent successfully translated and applied to RAN domain
+    phase: Applied
+    translatedParams:
+      coreParams:
+        fiveQI: 85
+        qfi: 85
+      ranParams:
+        maxPrbPolicyRatio: 100
+        minPrbPolicyRatio: 0
+        priority: 200
+        sd: 1122867
+        sst: 1
+  lastReconcileTime: "2026-03-31T14:16:11Z"
+  observedGeneration: 1
+  phase: Applied

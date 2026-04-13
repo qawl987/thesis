@@ -1,0 +1,19 @@
+apiVersion: workload.nephio.org/v1alpha1
+kind: NFConfig
+metadata:
+  name: gnb-nf-config
+  namespace: example
+spec:
+  configRefs:
+  - apiVersion: workload.nephio.org/v1alpha1
+    kind: SrsRANCellConfig
+    metadata:
+      name: gnb-cell-config
+  - apiVersion: workload.nephio.org/v1alpha1
+    kind: PLMNConfig
+    metadata:
+      name: gnb-plmn
+  - apiVersion: workload.nephio.org/v1alpha1
+    kind: SrsRANConfig
+    metadata:
+      name: gnb-srsran-config

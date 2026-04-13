@@ -1,0 +1,20 @@
+apiVersion: workload.nephio.org/v1alpha1
+kind: SrsRANConfig
+metadata:
+  name: gnb-srsran-config
+  namespace: example
+spec:
+  cucpImage: "docker.io/qawl987/srsran-split:latest"
+  cuupImage: "docker.io/qawl987/srsran-split:latest"
+  duImage: "docker.io/qawl987/srsran-split:latest"
+  ueImage: "docker.io/qawl987/srsran-ue:latest"
+  radioBreakerImage: "docker.io/qawl987/srsran-ue:latest"
+  zmqMode: true
+  srate: "11.52"
+  txGain: 75
+  rxGain: 75
+  ueCount: 1
+  sliceIntent:
+    type: eMBB
+    fiveQI: 9
+  amfAddr: "172.2.0.254"

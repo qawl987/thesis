@@ -1,0 +1,14 @@
+E2E Pipeline Latency Measurement
+Date: Fri Apr  3 05:58:17 AM UTC 2026
+Intent: config/samples/e2eqosintent_sample.yaml
+
+T0 (Intent applied):      05:57:47.887
+T1 (Porch complete):      05:57:56.943
+T2 (ConfigSync complete): 05:58:17.258
+T3 (ConfigMap updated):   05:58:17.317
+
+Durations:
+  E2E Orchestrator + Porch:     9.055752794s
+  ConfigSync (Git → Cluster):   20.314708152s
+  srsran-operator (ConfigMap):  .058957458s
+  TOTAL:                        29.429418404s

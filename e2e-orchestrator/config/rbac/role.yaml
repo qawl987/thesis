@@ -1,0 +1,52 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: e2e-orchestrator-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - e2e.intent.domain
+  resources:
+  - e2eqosintents
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - e2e.intent.domain
+  resources:
+  - e2eqosintents/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - e2e.intent.domain
+  resources:
+  - e2eqosintents/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - porch.kpt.dev
+  resources:
+  - packagerevisionresources
+  - packagerevisions
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch

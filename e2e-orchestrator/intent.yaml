@@ -1,0 +1,25 @@
+apiVersion: e2e.intent.domain/v1alpha1
+kind: E2EQoSIntent
+metadata:
+  name: slices-intent
+spec:
+  # 定義一個陣列 (Array)，讓 Operator 可以迴圈處理每一個切片意圖
+  intentGroups:
+    # ---------------- 第一個意圖：eMBB ----------------
+    - id: "embb"
+      contexts:
+        targetUEs: ["208930000000001"]
+      expectations:
+        sliceType: "eMBB"
+        bandwidth: "high"        # 轉譯器對應：5QI=6
+        resourceShare: "Partial" # 轉譯器對應：maxPrb=50, priority=10
+    # ---------------- 第二個意圖：URLLC 無人機 ----------------
+    - id: "urllc"
+      # 對應 3GPP: Contexts (條件/範圍，針對哪個 UE)
+      contexts:
+        targetUEs: ["208930000000002"]
+      # 對應 3GPP: Expectations & Targets (期望與目標 SLA)
+      expectations:
+        sliceType: "URLLC"
+        latency: "ultra-low"     # 轉譯器對應：5QI=85
+        resourceShare: "Full"    # 轉譯器對應：maxPrb=100, priority=200
